@@ -4,8 +4,8 @@ import fetch from "node-fetch";
 import sharp from "sharp";
 import fs from 'fs';
 import { extname, join } from "path";
-import { compareImagePaths } from "./utils/sortImages.js";
-import { rootPath, API_ENDPOINT } from "./config/config.js";
+import { compareImagePaths } from "../utils/sortImages.js";
+import { rootPath, API_ENDPOINT } from "../config/config.js";
 
 dotenv.config();
 const { readdir } = fs.promises;
@@ -90,8 +90,8 @@ const createMainImage = async (imagesPath) => {
     const imgWH = 256;
     const elementsPerRow = 8;
     const totalRows = Math.ceil(imagesPath.length / elementsPerRow);
-    const canvasHeight = totalRows * imgWH;
-    const canvasWidth = (elementsPerRow * imgWH)
+    const canvasHeight = (totalRows * imgWH) + headerImgHeight;
+    const canvasWidth = (elementsPerRow * imgWH);
 
     let initialXPosition = 0;
     let initialYPosition = headerImgHeight;
@@ -134,8 +134,8 @@ const createMainImage = async (imagesPath) => {
 
 
 const getImageShop = async () => {
-    const arrayOfLinks = await generateArrayOfLinks();
-    const isFetchDone = await fetchImagesSequentially(0, arrayOfLinks);
+    /* const arrayOfLinks = await generateArrayOfLinks();
+    const isFetchDone = await fetchImagesSequentially(0, arrayOfLinks.slice(0,10));
 
     if (isFetchDone) {
         const imagesPath = await readMediaDirectory();
@@ -146,7 +146,11 @@ const getImageShop = async () => {
             'shopJPEGPath': shopJPEGPath.replace(/\\/g, '/'),
             'totalItems': arrayOfLinks.length,
         };
-    }
+    } */
+
+    const imagesPath = await readMediaDirectory();
+
+    const shopJPEGPath = await createMainImage(imagesPath);
 }
 
 export { getImageShop, readMediaDirectory };
