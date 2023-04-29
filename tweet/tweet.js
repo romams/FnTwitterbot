@@ -30,7 +30,7 @@ const tweet = async () => {
     }
 }
 
-const tweetJob = new CronJob('40 01 23 * * *', () => {
+const tweetJob = new CronJob('00 58 23 * * *', () => {
     console.log('Iniciando tarea...');
     tweet()
 }, null, false, 'America/Mexico_city');
