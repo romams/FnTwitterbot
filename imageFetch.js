@@ -5,7 +5,7 @@ import sharp from "sharp";
 import fs from 'fs';
 import { extname, join } from "path";
 import { compareImagePaths } from "./utils/sortImages.js";
-import { rootPath } from "./config/config.js";
+import { rootPath, API_ENDPOINT } from "./config/config.js";
 
 dotenv.config();
 const { readdir } = fs.promises;
@@ -14,7 +14,7 @@ const generateArrayOfLinks = async () => {
     const arrayOfLinks = [];
 
     try {
-        const response = await fetch('https://fortniteapi.io/v2/shop?lang=es', {
+        const response = await fetch(API_ENDPOINT, {
             headers: { 'Authorization': process.env.FORTNITE_ACCESS_TOKEN }
         });
 
