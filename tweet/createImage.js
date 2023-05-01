@@ -134,8 +134,8 @@ const createMainImage = async (imagesPath) => {
 
 
 const getImageShop = async () => {
-    /* const arrayOfLinks = await generateArrayOfLinks();
-    const isFetchDone = await fetchImagesSequentially(0, arrayOfLinks.slice(0,10));
+    const arrayOfLinks = await generateArrayOfLinks();
+    const isFetchDone = await fetchImagesSequentially(0, arrayOfLinks);
 
     if (isFetchDone) {
         const imagesPath = await readMediaDirectory();
@@ -146,11 +146,7 @@ const getImageShop = async () => {
             'shopJPEGPath': shopJPEGPath.replace(/\\/g, '/'),
             'totalItems': arrayOfLinks.length,
         };
-    } */
-
-    const imagesPath = await readMediaDirectory();
-
-    const shopJPEGPath = await createMainImage(imagesPath);
+    }
 }
 
 export { getImageShop, readMediaDirectory };

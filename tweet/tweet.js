@@ -14,6 +14,7 @@ const tweet = async () => {
                 const tweetResp = await rwClient.v2.tweet(getTweetDescription(totalItems), { media: { media_ids: [mediaId] } });
 
                 if (tweetResp?.data?.id) {
+                    console.log('Tweet publicado...');
                     const imagesToRemove = await readMediaDirectory();
 
                     if (imagesToRemove.length > 0) {
@@ -30,7 +31,7 @@ const tweet = async () => {
     }
 }
 
-const tweetJob = new CronJob('00 58 23 * * *', () => {
+const tweetJob = new CronJob('00 05 19 * * *', () => {
     console.log('Iniciando tarea...');
     tweet()
 }, null, false, 'America/Mexico_city');
